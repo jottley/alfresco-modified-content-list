@@ -1,0 +1,62 @@
+<webscript>
+    <shortname>List Updated Content</shortname>
+    <description>List all updated content from a date to now
+    
+    This web script will return all a list of all content in a specified space
+    modified after the specified date
+    
+    /alfresco/service/updated/in/{path}/since?date={date}
+    
+    {path}    This is the path to the space that contains the content you want
+              to work with.
+    
+    {date}    Find all content newer than this date.  The date format is open:
+              Tested with yyyy/MM/dd hh:mm:ss but multiple formats can be passed
+              check out http://www.w3schools.com/jS/js_obj_date.asp for examples
+              
+    Removing /in/ in the URL as seen below
+    
+    /alfresco/service/updated/{path}/since?date={date}
+    
+    will perform for a recursive search of all content in all spaces under the 
+    space passed in the {path} parameter
+              
+    Example:
+    
+    /alfresco/service/updated/ebilling/Webster/client_name/Live/since?date=2010/03/17 02:00:00
+    
+    Returns an XML document by default. Example:
+    
+    
+    &lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    &lt;contentItems&gt;
+        &lt;contentItem name='test3.txt' path='some/path' modDate='2010-03-17T00:05:43.311-06:00'&gt;
+        &lt;contentItem name='test2.txt' path='some/path' modDate='2010-03-17T15:07:30.301-06:00'&gt;
+    &lt;/contentItems&gt;
+    
+    It can also return json and html
+    
+    JSON example:
+    
+    { "modified": [
+              { "node": {
+                         "name": "test3.txt", "path": "some/path","modified": "2010-03-17T00:05:43.311-06:00" 
+                        }
+              },
+              { "node": {
+                        "name": "test2.txt", "path": "some/path","modified": "2010-03-17T15:07:30.301-06:00"
+                        }
+              }
+              ] 
+    }
+    
+    </description>
+    <url>/updated/in/{path}/since?date={date}</url>
+    <url>/updated/{path}/since?date={date}</url>
+    <format default="xml">argument</format>
+    <authentication>user</authentication>
+          <cache>
+                    <never>true</never>
+                    <public>false</public>
+          </cache>
+</webscript>
