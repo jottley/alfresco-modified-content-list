@@ -5,9 +5,9 @@
             "node": {
                 "name": "${row.name}",
                 "path": "${row.displayPath}",
-                "modified": "${row.properties.modified?string}" 
+                "modified": "${row.properties.modified?datetime}" 
             }
-        }<#if permission_has_next>, </#if>
+        }<#if row_has_next>, </#if>
     </#list> 
     ] 
 }
